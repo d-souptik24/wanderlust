@@ -1,0 +1,58 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="form-container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h2 class="form-title">Edit Listing</h2>
+
+            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="listing-form">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input id="title" name="title" type="text" value="<%= listing.title %>" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea id="description" name="description" class="form-control" rows="4"><%= listing.description %></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image URL</label>
+                    <input id="image" name="image[url]" type="text" value="<%= listing.image.url %>" class="form-control">
+                </div>
+                
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input id="price" name="price" type="number" min="0" value="<%= listing.price %>" class="form-control">
+                    </div>
+
+                    <div class="mb-3 col-md-8">
+                        <label for="country" class="form-label">Country</label>
+                        <input id="country" name="country" type="text" value="<%= listing.country %>" class="form-control">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input id="location" name="location" type="text" value="<%= listing.location %>" class="form-control">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Update Listing</button>
+                    <a href="/listings/<%= listing._id %>" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+
+            <hr class="my-4">
+
+            <div class="delete-section">
+                <h5>Danger Zone</h5>
+                <p class="text-muted">Once you delete a listing, there is no going back. Please be certain.</p>
+                <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" style="display:inline;">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this listing?');">Delete Listing</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
